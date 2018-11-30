@@ -13,13 +13,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     <title>Title</title>
     <link href="css/bootstrap.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/dialog.css">
     <link href="css/bootstrap-theme.min.css" rel="stylesheet"/>
     <style type="text/css">
         .logo{
             padding:0;
         }
         #mycarousel{
-            margin: 50px;
+            margin: 40px;
         }
         #navbar-collapse{
             margin-top: 0;
@@ -63,10 +64,6 @@
         @media(min-width:992px){
             .tab-h2{
                 font-size: 28px;
-                background-image: url("img/33.jpg");
-                height: 50px;
-                opacity:0.60;
-                text-align: center;
             }
             .tab-p{
                 font-size: 17px;
@@ -108,9 +105,9 @@
     <div class="container">
         <div class="navbar-header">
             <a href="${first.turl}" class="navbar-brand logo"><img src="img/345.jpg" style="width: 45px;height: 45px"/></a>
-            <a href="javascript:void(0);" class="navbar-brand " id="login">登陆</a>
-            <a href="javascript:void(0);" class="navbar-brand " >|</a>
-            <a href="javascript:void(0);" class="navbar-brand " id="regis">注册</a>
+            <a href="" class="navbar-brand dis" data-toggle="modal" data-target="#insertVideo">登陆</a>
+            <a href="javascript:void(0);" class="navbar-brand dis" >|</a>
+            <a href="javascript:void(0);" class="navbar-brand dis" id="regis">注册</a>
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -121,9 +118,9 @@
             <ul class="nav navbar-nav navbar-right">
                 <c:forEach items="${title}" var="ti">
                     <c:if test="${ti.tid == 1}">
-                    <li class="active"><a href="${ti.turl}"><span class="glyphicon glyphicon-star"></span> ${ti.tname}</a></li>
+                    <li class="active"><a href="${ti.turl}"><span class="glyphicon"></span> ${ti.tname}</a></li>
                     </c:if>
-                    <li><a href="${ti.turl}"><span class="glyphicon glyphicon-star"></span> ${ti.tname}</a></li>
+                    <li><a href="${ti.turl}"><span class="glyphicon"></span> ${ti.tname}</a></li>
                 </c:forEach>
             </ul>
         </div>
@@ -152,7 +149,7 @@
 </div>
 <div class="tab1">
     <div class="container">
-        <h2 class="tab-h2" >超级排球</h2>
+        <h2 class="tab-h2" >精美图集</h2>
         <p class="tab-p">[专注于排球项目的资讯平台超级排球,通过超级排球app即可随时随地获取最新的排球运动资讯,了解精彩的排球赛事,观看花絮视频等。]</p>
         <div class="row">
             <div class="col-md-6 col">
@@ -248,7 +245,40 @@
         <p>©1999-2018 CSDN版权所有京ICP证09002463号</p>
     </div>
 </footer>
-<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+
+<div class="modal fade" id="insertVideo">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="video-delete">
+                <img class="cursor-point" src="img/delete.png"
+                     onclick="$('#insertVideo').modal('hide')">
+            </div>
+            <div class="video-title">登陆</div>
+                <div class="video-url">
+                    <span class="inline-mid">账号：</span>
+                    <input class="inline-mid" id="name" type="text" placeholder="账号/邮箱"/>
+                </div>
+                <div class="video-url">
+                    <span class="inline-mid">密码：</span>
+                    <input class="inline-mid" id="pwd" type="password"/>
+                </div>
+                <div class="video-button">
+                    <div class="inline-mid button-blue cursor-point" id="logins" >确定</div>
+                    <div class="inline-mid button-gray cursor-point"
+                         onclick="$('#insertVideo').modal('hide')"
+                    >取消</div>
+                </div>
+        </div>
+    </div>
+</div>
+<div id="hwq_tool_tip" style="position:fixed;z-index:9999;top:0;width:100%;height:100%;opacity:0;display:none">
+    <div style="background:#4C4C4C;width: 150px;border-radius:10px; padding: 11px 0 5px 0; margin:20% auto 0 auto">
+        <img src="" style="display:block;width:22px;margin-left:64px"/>
+        <span style="display:block;line-height:40px;font-size:14px;text-align:center;color:white"></span>
+    </div>
+</div>
+
+<script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/echarts.common.min.js"></script>
 <script type="text/javascript">
@@ -267,10 +297,22 @@
         $("#mycarousel").carousel({
             interval:5000,
         });
-
+    });
+    $("#logins").on("click",function(){
+            $.post("user/login",{"nickname":null,"username":$("#name").val(),"password":$("#pwd").val()},function(data){
+                    if(data!=null){
+                        alert(data);
+                        $('#insertVideo').modal('hide');
+                        $(".dis").remove();
+                        var ss = '<a href="javascript:void(0);" class="navbar-brand ">欢迎您:'+data.username+'</a>';
+                        $(".navbar-header").append(ss);
+                    }else{
+                      alert(data);
+                        $('#insertVideo').modal('hide');
+                    }
+            });
 
     });
-
 </script>
 </body>
 </html>

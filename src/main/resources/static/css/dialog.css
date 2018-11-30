@@ -1,0 +1,218 @@
+.inline-mid {
+    display: inline-block;
+    width: 112px;
+    text-align: right;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+.cursor-point:hover {
+    cursor: pointer;
+}
+.modal-content {
+    padding: 0 0 31px 0;
+    margin: 30% 0 0 0;
+}
+.video-delete {
+    text-align: right;
+    padding: 5px 10px 0 0;
+}
+.video-title {
+    text-align: center;
+    font-size: 20px;
+    color: #000000;
+}
+.video-titles {
+    margin: 10px 0;
+    text-align: center;
+    font-size: 20px;
+    color: #000000;
+}
+.video-url {
+    margin: 30px 0 0 30px;
+    font-size: 0;
+}
+.video-url > span, .video-local > span:nth-child(1) {
+    font-size: 16px;
+    color: #000000;
+}
+.video-url > input {
+    width: 300px;
+    height: 40px;
+    outline: none;
+    text-indent: 12px;
+    padding: 0;
+    margin:0;
+    border: 1px solid #D9DBEA;
+    color: #000000;
+    text-align: center;
+    font-size: 16px;
+}
+.video-local {
+    margin: 30px 0 0 30px;
+    font-size: 0;
+}
+.video-local > span:nth-child(2) {
+    width: 60px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    color: #FFFFFF;
+    background: #43B2FF;
+    font-size: 16px;
+    border-radius: 4px;
+    margin: 0;
+}
+.video-local > input {
+    width: 60px;
+    height: 30px;
+    margin: 0 0 0 -60px;
+    opacity: 0;
+}
+.video-button {
+    margin: 30px 0 0 86px;
+    font-size: 0;
+    /*margin: 0 auto;*/
+}
+.video-button > div {
+    width: 92px;
+    height: 36px;
+    text-align: center;
+    line-height: 32px;
+    font-size: 16px;
+    border-radius: 4px;
+    color: #FFFFFF;
+    margin: 0 0 0 46px;
+}
+.button-blue {
+    background: #43B2FF;
+}
+.button-gray {
+    background: #858585;
+}
+select{
+    width: 300px;
+    height: 40px;
+    border: 1px solid #D9D9D9;
+    font-size: 14px;
+    background: #f7f7f7;
+    text-align: center;
+    padding-left: 6px;
+    color: #666;
+    outline:none;
+    background: #fff;
+    line-height: normal;
+    text-align: left;
+}
+/*删除提示*/
+.modal-body {
+    text-align: ce;
+}
+
+/*添加赛事补充样式*/
+h3{
+    text-align: center;
+}
+.item-list{
+    padding:15px 30px;
+    text-align: left;
+    /*display: flex;*/
+}
+.item-list label{
+    margin: 0  5px;
+}
+.lable{
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+    /*border:solid 1px red;*/
+}
+.input{
+    width: 80%;
+    height: 40px;
+}
+
+.textarea{
+    line-height: 30px;
+    display: inline-block;
+    width: 80%;
+    visibility: inherit;
+}
+.box{
+    display: flex;
+    justify-content: center;
+}
+.box-left{
+    width: 70%;
+}
+.box-left-list{
+    margin: 15px 0;
+}
+.scope{
+    height: 40px;
+    width: 200px;
+}
+.box-right{
+    margin: 15px;
+    width: 150px;
+    height: 314px;
+    text-align: center;
+    border:solid 1px #A9A9A9;
+    position: relative;
+}
+.addimg{
+    position: absolute;
+    left:35px;
+    top: 130px;
+    overflow: hidden;
+    width: 100px;
+    height: 40px;
+    opacity: 0;
+}
+.addlable{
+    width: 100px;
+    margin: auto;
+    margin-top: 130px;
+
+}
+.min-box{
+    display: flex;
+    justify-content:space-between ;
+}
+.min-box-left{
+    width: 54%;
+    margin-left: 21px;
+}
+.min-box-right{
+    width: 45.5%;
+}
+.min-box-list{
+    display: flex;
+    margin-bottom: 15px;
+}
+.min-list-label{
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    text-align: right;
+}
+.min-box-list input{
+    width: 200px;
+    height: 40px;
+    margin-left: 10px;
+}
+.boot-text{
+}
+.min-text{
+    width: 127px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: right;
+}
+.min-textarea{
+    width: 78%;
+    height: 100px;
+}
+.min-button{
+    margin: 10px auto;
+}
+/*添加赛事补充样式*/
