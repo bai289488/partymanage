@@ -122,10 +122,10 @@
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <c:forEach items="${title}" var="ti">
-                    <c:if test="${ti.tid == 1}">
+                    <c:if test="${ti.tid == 2}">
                     <li class="active"><a href="${ti.turl}"><span class="glyphicon"></span> ${ti.tname}</a></li>
                     </c:if>
-                    <c:if test="${ti.tid != 1}">
+                    <c:if test="${ti.tid != 2}">
                     <li><a href="${ti.turl}"><span class="glyphicon"></span> ${ti.tname}</a></li>
                     </c:if>
                 </c:forEach>
