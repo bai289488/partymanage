@@ -1,4 +1,4 @@
-package com.party.feng.partymanage.main.controller;
+package com.party.feng.partymanage.callback.controller;
 
 import com.party.feng.partymanage.address.service.AddressService;
 import com.party.feng.partymanage.circle.service.CircleService;
@@ -16,10 +16,11 @@ import java.util.List;
 
 /**
  * @author admin
- * @version 2018/11/29
+ * @version 2018/12/6
  */
 @Controller
-public class MainController {
+@RequestMapping("call")
+public class CallBackController {
 
     @Autowired
     private TitleService titleService;
@@ -30,7 +31,7 @@ public class MainController {
     @Autowired
     private AddressService addressService;
 
-    @RequestMapping("/")
+    @RequestMapping("/toCallBack")
     public ModelAndView getMain(@CookieValue(value = "username",required = false)String username){
         ModelAndView mv = new ModelAndView();
         List<Title> list = titleService.getList();
@@ -45,8 +46,7 @@ public class MainController {
         }else{
             mv.addObject("users",username);
         }
-        mv.setViewName("main");
+        mv.setViewName("callback");
         return mv;
     }
-
 }

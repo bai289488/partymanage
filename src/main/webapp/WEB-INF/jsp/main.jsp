@@ -8,6 +8,7 @@
             + path + "/";
 %>
 <base href="<%=basePath%>">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
@@ -45,6 +46,10 @@
             letter-spacing: 1px;
             color: #999;
             margin: 20px 0 40px;
+        }
+        label{
+            width:18px;
+            display: inline;
         }
         .tab1{
             margin: 30px 0;
@@ -108,7 +113,7 @@
             <c:if test="${users == null}">
             <a href="" class="navbar-brand dis" data-toggle="modal" data-target="#insertVideo">登陆</a>
             <a href="javascript:void(0);" class="navbar-brand dis" >|</a>
-            <a href="javascript:void(0);" class="navbar-brand dis" id="regis">注册</a>
+            <a href="" class="navbar-brand dis" data-toggle="modal" data-target="#regisVideo">注册</a>
             </c:if>
             <c:if test="${users != null}">
             <a href="javascript:void(0);" class="navbar-brand ">欢迎您:${users}</a>
@@ -249,7 +254,7 @@
 <footer id="footer">
     <div class="container">
         <p>北京华羽集团</p>
-        <p>©1999-2018 CSDN版权所有京ICP证09002463号</p>
+        <p>©1999-2018 CSDN版权所有京号</p>
     </div>
 </footer>
 
@@ -261,27 +266,110 @@
                      onclick="$('#insertVideo').modal('hide')">
             </div>
             <div class="video-title">登陆</div>
-                <div class="video-url">
-                    <span class="inline-mid">账号：</span>
-                    <input class="inline-mid" id="name" type="text" placeholder="账号/邮箱"/>
-                </div>
-                <div class="video-url">
-                    <span class="inline-mid">密码：</span>
-                    <input class="inline-mid" id="pwd" type="password"/>
-                </div>
+            <div class="video-url">
+                <span class="inline-mid">账号：</span>
+                <input class="inline-mid" id="name" type="text" placeholder="账号/邮箱"/>
+            </div>
+            <div class="video-url">
+                <span class="inline-mid">密码：</span>
+                <input class="inline-mid" id="pwd" type="password" placeholder="密码"/>
+            </div>
             <div class="video-url">
                 <span class="inline-mid">记住：</span>
                 <input class="inline-mid" id="rembers" type="radio" value="1"/>
             </div>
-                <div class="video-button">
-                    <div class="inline-mid button-blue cursor-point" id="logins" >确定</div>
-                    <div class="inline-mid button-gray cursor-point"
-                         onclick="$('#insertVideo').modal('hide')"
-                    >取消</div>
-                </div>
+            <div class="video-button">
+                <div class="inline-mid button-blue cursor-point" id="logins" >确定</div>
+                <div class="inline-mid button-gray cursor-point"
+                     onclick="$('#insertVideo').modal('hide')"
+                >取消</div>
+            </div>
         </div>
     </div>
 </div>
+<div class="modal fade" id="regisVideo">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="video-delete">
+                <img class="cursor-point" src="img/delete.png"
+                     onclick="$('#regisVideo').modal('hide')">
+            </div>
+            <div class="video-title">注册</div>
+            <form id="form1" action="" method="post">
+            <div class="video-url" style="font-size: 2px">
+                <span class="inline-mid">账号：</span>
+                <input class="inline-mid" name="username" type="text" placeholder="账号"/>
+            </div>
+            <div class="video-url">
+                <input class="inline-mid" id="userss" type="text" style="display: none"/>
+            </div>
+            <div class="video-url">
+                <span class="inline-mid">密码：</span>
+                <input class="inline-mid" name="password" type="password" placeholder="密码"/>
+            </div>
+            <div class="video-url">
+                <input class="inline-mid" id="pass" type="text" style="display: none"/>
+            </div>
+            <div class="video-url">
+                <span class="inline-mid">邮箱：</span>
+                <input class="inline-mid" name="nickname" type="text" placeholder="邮箱"/>
+            </div>
+            <div class="video-url">
+                <input class="inline-mid" id="nickss" type="text" style="display: none"/>
+            </div>
+            <div class="video-url" >
+                <span class="inline-mid">年龄：</span>
+                <input class="inline-mid" name="age" type="text" placeholder="年龄"/>
+            </div>
+            <div class="video-url">
+                <input class="inline-mid" id="agess" type="text" style="display: none"/>
+            </div>
+            <div class="video-url" style="font-size: 2px">
+                <%--<label class="inline-mid"><input type="radio"  name="sex" value="0"><span style="width: 5px">保密</span></label>--%>
+                <%--<label class="inline-mid"><input type="radio" name="sex" value="1"><span style="width: 5px">男性</span></label>--%>
+                <%--<label class="inline-mid"><input type="radio" name="sex" value="2"><span style="width: 5px">女性</span></label><br />--%>
+                <div class="inline-mid ra">
+                    <span>保密：</span><input type="radio"  name="sex" value="0">
+                </div>
+                <div class="inline-mid ra">
+                    <span>男性：</span><input type="radio" name="sex" value="1">
+                </div>
+                <div class="inline-mid ra">
+                    <span>女性：</span><input type="radio" name="sex" value="2">
+                </div>
+            </div>
+            <div class="video-url">
+                <span class="inline-mid">省：</span>
+                <select name="province">
+                    <option value="-1">请选择省</option>
+                    <c:forEach items="${provice}" var="pro">
+                        <option value="${pro.provinceid}">${pro.province}</option>
+                    </c:forEach>
+                </select>
+            </div>
+            <div class="video-url">
+                <span class="inline-mid">市：</span>
+                <select name="city">
+                    <option value="-1">请选择市</option>
+                </select>
+            </div>
+            <div class="video-url">
+                <span class="inline-mid">县/区：</span>
+                <select name="district">
+                    <option value="-1">请选择县/区</option>
+                </select>
+            </div>
+            <div class="video-button">
+                <div class="inline-mid button-blue cursor-point" onclick="submits()">确定</div>
+                <div class="inline-mid button-gray cursor-point"
+                     onclick="$('#regisVideo').modal('hide')"
+                >取消</div>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+
 <div id="hwq_tool_tip" style="position:fixed;z-index:9999;top:0;width:100%;height:100%;opacity:0;display:none">
     <div style="background:#4C4C4C;width: 150px;border-radius:10px; padding: 11px 0 5px 0; margin:20% auto 0 auto">
         <img src="" style="display:block;width:22px;margin-left:64px"/>
@@ -323,6 +411,78 @@
             });
 
     });
+
+    $("select[name='province']").on('change',function(){
+        var proid = $("select[name='province']").val();
+        $.post("user/getList",{"typeid":1,"fatherid":proid},function(data){
+            $.each(data,function(index,list){
+                var opera = "<option value="+list.cityid+">"+list.city+"</option>";
+                $("select[name='city']").append(opera);
+            })
+        });
+    });
+
+    $("select[name='city']").on('change',function(){
+        var city = $("select[name='city']").val();
+        alert(city);
+        $.post("user/getList",{"typeid":2,"fatherid":city},function(data) {
+          $.each(data,function (index, list) {
+                var operas = "<option value="+list.areaid+">"+list.area+"</option>";
+                $("select[name='district']").append(operas);
+            })
+        });
+    });
+
+   function submits(){
+        var jsons = $("#form1").serializeObject();
+        $.post("user/regis",jsons,function(res) {
+            var data = res.errorMap;
+            if(res.result==null){
+                if(data.username!=null){
+                    $("#userss").css('display','block');
+                    $("#userss").val(data.username);
+                }else if(data.password!=null){
+                    $("#pass").css('display','block');
+                    $("#pass").val(data.password);
+                }else if(data.nickname!=null){
+                    $("#nickss").css('display','block');
+                    console.log(data.nickname);
+                    $("#nickss").val(data.nickname);
+                }else if(data.age!=null){
+                    $("#agess").css('display','block');
+                    console.log(data.age);
+                    $("#agess").val(data.age);
+                }
+            }else{
+                if(res.result=="success"){
+                    alert("success");
+                    $('#regisVideo').modal('hide');
+                    window.location.href = '/';
+                }else{
+                    alert("false");
+                    $('#regisVideo').modal('hide');
+                    window.location.href = '/';
+                }
+            }
+
+        });
+    }
+
+    $.fn.serializeObject = function(){
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a,function(){
+            if(o[this.name]){
+                if(!o[this.name].push){
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            }else{
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    }
 </script>
 </body>
 </html>

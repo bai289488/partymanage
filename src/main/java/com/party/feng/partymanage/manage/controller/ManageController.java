@@ -1,4 +1,4 @@
-package com.party.feng.partymanage.main.controller;
+package com.party.feng.partymanage.manage.controller;
 
 import com.party.feng.partymanage.address.service.AddressService;
 import com.party.feng.partymanage.circle.service.CircleService;
@@ -16,10 +16,12 @@ import java.util.List;
 
 /**
  * @author admin
- * @version 2018/11/29
+ * @version 2018/12/6
  */
 @Controller
-public class MainController {
+@RequestMapping("manage")
+public class ManageController {
+
 
     @Autowired
     private TitleService titleService;
@@ -30,7 +32,7 @@ public class MainController {
     @Autowired
     private AddressService addressService;
 
-    @RequestMapping("/")
+    @RequestMapping("/toManageView")
     public ModelAndView getMain(@CookieValue(value = "username",required = false)String username){
         ModelAndView mv = new ModelAndView();
         List<Title> list = titleService.getList();
@@ -45,8 +47,7 @@ public class MainController {
         }else{
             mv.addObject("users",username);
         }
-        mv.setViewName("main");
+        mv.setViewName("manage");
         return mv;
     }
-
 }

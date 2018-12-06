@@ -16,6 +16,16 @@ public class Images {
 
     private Integer parentid;
 
+    private String idetail;
+
+    public String getIdetail() {
+        return idetail;
+    }
+
+    public void setIdetail(String idetail) {
+        this.idetail = idetail;
+    }
+
     public Integer getParentid() {
         return parentid;
     }

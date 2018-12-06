@@ -3,6 +3,10 @@ package com.party.feng.partymanage.entity;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 /**
@@ -15,13 +19,22 @@ public class User {
 
     private String id;
 
+    @NotNull(message = "用户名格式错误")
+    @Pattern(regexp = ".{4,10}",message = "用户名格式错误")
     private String username;
 
+    @NotNull(message = "密码格式错误")
+    @Pattern(regexp = ".{6,16}",message = "密码格式错误")
     private String password;
 
+    @NotNull(message = "邮箱格式错误")
+    @Pattern(regexp = "^[A-Za-z\\d]+([-_.][A-Za-z\\d]+)*@([A-Za-z\\d]+[-.])+[A-Za-z]{2,5}$",message = "邮箱格式错误")
     private String nickname;
 
+    @Min(value = 1,message = "亲,您还没有出生吧")
+    @Max(value = 150,message = "年龄不符合")
     private Integer age;
+
 
     private Integer sex;
 
@@ -29,11 +42,11 @@ public class User {
 
     private String faceImage;
 
-    private String province;
+    private Integer province;
 
-    private String city;
+    private Integer city;
 
-    private String district;
+    private Integer district;
 
     private String address;
 
@@ -113,27 +126,27 @@ public class User {
         this.faceImage = faceImage;
     }
 
-    public String getProvince() {
+    public Integer getProvince() {
         return province;
     }
 
-    public void setProvince(String province) {
+    public void setProvince(Integer province) {
         this.province = province;
     }
 
-    public String getCity() {
+    public Integer getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(Integer city) {
         this.city = city;
     }
 
-    public String getDistrict() {
+    public Integer getDistrict() {
         return district;
     }
 
-    public void setDistrict(String district) {
+    public void setDistrict(Integer district) {
         this.district = district;
     }
 
