@@ -62,6 +62,16 @@ public class User {
 
     private String userUuid;
 
+    private String yanZheng;
+
+    public String getYanZheng() {
+        return yanZheng;
+    }
+
+    public void setYanZheng(String yanZheng) {
+        this.yanZheng = yanZheng;
+    }
+
     public String getId() {
         return id;
     }

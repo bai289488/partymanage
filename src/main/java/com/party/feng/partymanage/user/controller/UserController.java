@@ -4,8 +4,12 @@ import com.party.feng.partymanage.address.service.AddressService;
 import com.party.feng.partymanage.entity.Area;
 import com.party.feng.partymanage.entity.City;
 import com.party.feng.partymanage.entity.User;
+import com.party.feng.partymanage.sender.MailService;
 import com.party.feng.partymanage.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,10 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author admin
@@ -32,16 +33,25 @@ import java.util.Map;
 @RequestMapping("user")
 public class UserController {
 
+    public static final String Alert = "您的验证码已发出！！！";
+
     @Autowired
     private UserService userService;
 
     @Autowired
     private AddressService addressService;
 
+    @Autowired
+    private MailService mailService;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
+
     @RequestMapping("/regis")
     @ResponseBody
     public Map<String,Object> getRegis(@Valid User user, BindingResult br,HttpServletResponse response){
         Map<String,Object> map = new HashMap<>();
+
         boolean flag = br.hasErrors();
         if(flag){
             //FileldError 对象封装了两个对象, 一个是发生错误的字段，一个是错误的信息
@@ -58,8 +68,13 @@ public class UserController {
             map.put("errorMap",errorMessageMap);
 
         }else{
-            String s = userService.insertUser(user);
-            map.put("result",s);
+            ValueOperations ops = redisTemplate.opsForValue();
+            String sd = (String)ops.get("ds:"+user.getNickname());
+            if(user.getYanZheng().equals(sd)){
+                System.out.println("哥，成了");
+                String s = userService.insertUser(user);
+                map.put("result",s);
+            }
             Cookie cookie = new Cookie("username",user.getUsername());
             cookie.setPath("/");
             cookie.setMaxAge(3600);
@@ -68,11 +83,22 @@ public class UserController {
         return map;
     }
 
+    @RequestMapping("getYan")
+    @ResponseBody
+    public String getYan(String nickname){
+        ValueOperations ops = redisTemplate.opsForValue();
+        String sl = UUID.randomUUID().toString().replace("-", "");
+        String substring = sl.substring(0, 5);
+        ops.set("ds:"+nickname,substring);
+        mailService.sendMail(nickname,"验证码",substring);
+        return Alert+substring;
+    }
+
+
     @RequestMapping("/login")
     @ResponseBody
     public User login(@RequestParam("username") String username, @RequestParam("nickname")String nickname, @RequestParam("password")String password, HttpServletRequest request,HttpServletResponse response) throws Exception{
         String flag = request.getParameter("flag");
-
         User user = userService.getUser(username, password, nickname);
         if(flag.equals("1") && user != null ){
             Cookie cookie = new Cookie("username",username);

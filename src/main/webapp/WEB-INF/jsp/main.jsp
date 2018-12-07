@@ -258,6 +258,21 @@
     </div>
 </footer>
 
+<div class="modal fade" id="alertVideo">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="video-delete">
+                <img class="cursor-point" src="img/delete.png"
+                     onclick="$('#alertVideo').modal('hide')">
+            </div>
+            <div class="video-title">提示框</div>
+            <div class="alert-url" style="text-align: center">
+                <span id="diss"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="insertVideo">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -312,7 +327,7 @@
             </div>
             <div class="video-url">
                 <span class="inline-mid">邮箱：</span>
-                <input class="inline-mid" name="nickname" type="text" placeholder="邮箱"/>
+                <input class="inline-mid" name="nickname" type="text" placeholder="邮箱" onblur="getyan()"/>
             </div>
             <div class="video-url">
                 <input class="inline-mid" id="nickss" type="text" style="display: none"/>
@@ -358,6 +373,10 @@
                 <select name="district">
                     <option value="-1">请选择县/区</option>
                 </select>
+            </div>
+            <div class="video-url" >
+                <span class="inline-mid">验证码：</span>
+                <input class="inline-mid" name="yanZheng" type="text" placeholder="邮箱验证码"/>
             </div>
             <div class="video-button">
                 <div class="inline-mid button-blue cursor-point" onclick="submits()">确定</div>
@@ -432,6 +451,12 @@
             })
         });
     });
+
+    function getyan(){
+        $.post("user/getYan",{"nickname":$("[name='nickname']").val()},function(res) {
+            alert(res);
+        })
+    }
 
    function submits(){
         var jsons = $("#form1").serializeObject();
