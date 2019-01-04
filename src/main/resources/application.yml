@@ -28,6 +28,9 @@ spring:
           auth:true
           enable:true
           required:true
+    data:
+      mongodb:
+        uri: mongodb://192.168.30.131:27017/springboot-db
 server:
   port: 8888
   redis:

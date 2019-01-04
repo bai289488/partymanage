@@ -90,14 +90,15 @@ public class UserController {
         String sl = UUID.randomUUID().toString().replace("-", "");
         String substring = sl.substring(0, 5);
         ops.set("ds:"+nickname,substring);
-        mailService.sendMail(nickname,"验证码",substring);
+   //     mailService.sendMail(nickname,"验证码",substring);
+        System.out.println(substring);
         return Alert+substring;
     }
 
 
     @RequestMapping("/login")
     @ResponseBody
-    public User login(@RequestParam("username") String username, @RequestParam("nickname")String nickname, @RequestParam("password")String password, HttpServletRequest request,HttpServletResponse response) throws Exception{
+    public User login(@RequestParam(value="username") String username, @RequestParam(value ="nickname")String nickname, @RequestParam(value="password")String password, HttpServletRequest request,HttpServletResponse response) throws Exception{
         String flag = request.getParameter("flag");
         User user = userService.getUser(username, password, nickname);
         if(flag.equals("1") && user != null ){

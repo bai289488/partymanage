@@ -103,6 +103,32 @@
             width:40%;
             height: 40%;
         }
+        /*头像样式*/
+        .cx-img {
+            width: 100px !important;
+            height: 100px !important;
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 117px;
+        }
+        .pic-position{
+            position: relative;
+        }
+        .cx-pic {
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            outline: none;
+            text-indent: 12px;
+            left: 117px;
+            padding: 0;
+            margin: -22px 0 0 118px;
+            border: 1px solid #D9DBEA;
+            color: #000000;
+            text-align: center;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
@@ -325,6 +351,13 @@
             <div class="video-url">
                 <input class="inline-mid" id="pass" type="text" style="display: none"/>
             </div>
+            <div class="video-url  pic-position">
+                <span class="inline-mid">头像：</span>
+                <input class="inline-mid cx-img" id="upImg" type="file"><div class="cx-pic"><img id="img2" style="height:100%;width:100%;margin-left: -12px;" src="img/cx-pic.png"/></div>
+            </div>
+                <div class="video-url">
+                    <input class="inline-mid" name="faceImage" type="text" style="display: none"/>
+                </div>
             <div class="video-url">
                 <span class="inline-mid">邮箱：</span>
                 <input class="inline-mid" name="nickname" type="text" placeholder="邮箱" onblur="getyan()"/>
@@ -508,6 +541,29 @@
         });
         return o;
     }
+
+    $("#upImg").on('change',function(){
+        var forData = new FormData();
+        console.log($(this).get(0).files[0]);
+        forData.append("imgFile",$(this).get(0).files[0]);
+        var result = '';
+        $.ajax({
+            url: 'upload/uploadFile?modelName=party',
+            type: 'post',
+            cache: false,
+            data: forData,
+            processData: false,
+            contentType: false,
+            async: false
+        }).done(function(res){
+            let dataObj = res;
+            console.log(res);
+            $("#img2").attr('src',dataObj);
+
+            $('input[name="faceImage"]').val(dataObj);
+        }).fail(function (res) {
+        });
+    })
 </script>
 </body>
 </html>

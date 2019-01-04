@@ -2,6 +2,8 @@ package com.party.feng.partymanage.main.controller;
 
 import com.party.feng.partymanage.address.service.AddressService;
 import com.party.feng.partymanage.circle.service.CircleService;
+import com.party.feng.partymanage.comm.BaseController;
+import com.party.feng.partymanage.comm.PartyException;
 import com.party.feng.partymanage.entity.Circle;
 import com.party.feng.partymanage.entity.Province;
 import com.party.feng.partymanage.entity.Title;
@@ -19,7 +21,7 @@ import java.util.List;
  * @version 2018/11/29
  */
 @Controller
-public class MainController {
+public class MainController extends BaseController{
 
     @Autowired
     private TitleService titleService;
@@ -31,7 +33,7 @@ public class MainController {
     private AddressService addressService;
 
     @RequestMapping("/")
-    public ModelAndView getMain(@CookieValue(value = "username",required = false)String username){
+    public ModelAndView getMain(@CookieValue(value = "username",required = false)String username) throws PartyException {
         ModelAndView mv = new ModelAndView();
         List<Title> list = titleService.getList();
         List<Circle> list1 = circleService.getList();
@@ -42,6 +44,7 @@ public class MainController {
         mv.addObject("provice",provines);
         if(username == ""||username==null){
             mv.addObject("users",null);
+         //   throw new PartyException(PartyError.PARAMATER_VALIDATION_ERROR);
         }else{
             mv.addObject("users",username);
         }
