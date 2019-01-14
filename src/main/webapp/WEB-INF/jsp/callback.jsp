@@ -119,8 +119,10 @@
             <div class="col-md-3 hidden-sm hidden-xs">
                 <div class="list-group">
                     <a href="#1" class="list-group-item">1.公司介绍</a>
-                    <a href="#2" class="list-group-item">2.加入我们</a>
+                    <a href="#2" class="list-group-item" >2.加入我们</a>
                     <a href="#3" class="list-group-item">3.公司远景</a>
+                    <a href="javascript:void(0);" class="list-group-item" id="callas">4.联系我们</a>
+                    <a href="javascript:void(0);" class="list-group-item" id="callme">5.联系admin</a>
                 </div>
             </div>
             <div class="col-md-9 about">
@@ -178,6 +180,15 @@
             interval:5000,
         });
     })
+
+    $("#callas").on("click",function(){
+        window.location.href="call/toCallUs"
+    })
+
+    $("#callme").on("click",function(){
+        window.location.href="call/toCallme"
+    })
+
 </script>
 </body>
 </html>

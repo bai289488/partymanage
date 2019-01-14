@@ -49,4 +49,42 @@ public class CallBackController {
         mv.setViewName("callback");
         return mv;
     }
+
+    @RequestMapping("/toCallUs")
+    public ModelAndView  toCallUs(@CookieValue(value = "username",required = false)String username){
+        ModelAndView mv = new ModelAndView();
+        List<Title> list = titleService.getList();
+        List<Circle> list1 = circleService.getList();
+        List<Province> provines = addressService.getProvines();
+        mv.addObject("first",list.get(0));
+        mv.addObject("title",list);
+        mv.addObject("circle",list1);
+        mv.addObject("provice",provines);
+        if(username == ""||username==null){
+            mv.addObject("users",null);
+        }else{
+            mv.addObject("users",username);
+        }
+        mv.setViewName("callas");
+        return mv;
+    }
+
+    @RequestMapping("/toCallme")
+    public ModelAndView  toCallme(@CookieValue(value = "username",required = false)String username){
+        ModelAndView mv = new ModelAndView();
+        List<Title> list = titleService.getList();
+        List<Circle> list1 = circleService.getList();
+        List<Province> provines = addressService.getProvines();
+        mv.addObject("first",list.get(0));
+        mv.addObject("title",list);
+        mv.addObject("circle",list1);
+        mv.addObject("provice",provines);
+        if(username == ""||username==null){
+            mv.addObject("users",null);
+        }else{
+            mv.addObject("users",username);
+        }
+        mv.setViewName("callme");
+        return mv;
+    }
 }

@@ -5,7 +5,7 @@ spring:
           password: 123456
           driver-class-name: com.mysql.jdbc.Driver
     activemq:
-        broker-url: tcp://192.168.30.131:61616
+        broker-url: tcp://192.168.30.132:61616
         user: admin
         password: admin
         pool:
@@ -30,7 +30,7 @@ spring:
           required:true
     data:
       mongodb:
-        uri: mongodb://192.168.30.131:27017/springboot-db
+        uri: mongodb://192.168.30.132:27017/springboot-db
 server:
   port: 8888
   redis:
