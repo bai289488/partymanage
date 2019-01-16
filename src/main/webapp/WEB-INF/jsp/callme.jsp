@@ -122,7 +122,7 @@
                     <a href="#1" class="list-group-item">1.公司介绍</a>
                     <a href="#2" class="list-group-item" >2.加入我们</a>
                     <a href="#3" class="list-group-item">3.公司远景</a>
-                    <a href="#4" class="list-group-item active" id="callas" >4.联系我们</a>
+                    <a href="#4" class="list-group-item " id="callas" >4.联系我们</a>
                     <a href="#5" class="list-group-item active" id="callme" >5.联系admin</a>
                 </div>
             </div>
