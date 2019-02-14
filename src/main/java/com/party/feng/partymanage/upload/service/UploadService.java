@@ -16,4 +16,6 @@ public interface UploadService {
     String getUpToken();
 
     Map<String,Object> getImgUrlByBytes(MultipartFile upfile, String modelName);
+
+    Map<String,Object> getStaticFile(byte[] fileByte,String url);
 }

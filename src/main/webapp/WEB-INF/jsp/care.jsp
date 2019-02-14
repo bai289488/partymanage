@@ -125,6 +125,7 @@
                 <div class="list-group">
                     <a href="javascript:void(0);" class="list-group-item active" id="addscom">1.公司需求</a>
                     <a href="javascript:void(0);" class="list-group-item" id="addcom">2.公司添加</a>
+                    <a href="javascript:void(0);" class="list-group-item" id="gettem">3.公司模板</a>
                 </div>
             </div>
             <div class="col-md-9 about">
@@ -161,6 +162,9 @@
                     <textarea id="container" name="content" type="text/plain">这里写你的初始化内容</textarea>
                     <button id="btn" class="btn" onclick="postDate()">提交</button>
                 </div>
+                <div class="container" id="caret" style="display: none">
+                    <%--<iframe src="" frameborder="0" id="templ"></iframe>>--%>
+                </div>
             </div>
         </div>
     </div>
@@ -189,10 +193,33 @@
 
     $("#addcom").on("click",function(){
         $("#addscom").removeAttr("class").addClass("list-group-item");
+        $("#gettem").removeAttr("class").addClass("list-group-item");
         $("#addcom").addClass('active');
         $("#cares").css('display','none');
         $("#caref").css('display','block');
-    })
+        $("#caret").css('display','none');
+    });
+
+    $("#gettem").on("click",function(){
+        $("#addscom").removeAttr("class").addClass("list-group-item");
+        $("#addcom").removeAttr("class").addClass("list-group-item");
+        $("#gettem").addClass('active');
+        $("#cares").css('display','none');
+        $("#caref").css('display','none');
+        $("#caret").css('display','block');
+        $("#caret").empty();
+        $.ajax({
+            type:"GET",
+            url:"care/getTemplate",
+            dateType: "json",
+            data:'',
+            success:function(res){
+               var ff = '<iframe src=" '+res+'" frameborder="0" id="templ"></iframe>';
+                $("#caret").append(ff);
+            }
+        })
+    });
+
     var ue = UE.getEditor('container');
 
     function postDate() {

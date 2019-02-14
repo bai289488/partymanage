@@ -3,6 +3,7 @@ package com.party.feng.partymanage.care.controller;
 import com.alibaba.fastjson.JSONException;
 import com.baidu.ueditor.ActionEnter;
 import com.party.feng.partymanage.address.service.AddressService;
+import com.party.feng.partymanage.care.service.CareService;
 import com.party.feng.partymanage.circle.service.CircleService;
 import com.party.feng.partymanage.entity.Circle;
 import com.party.feng.partymanage.entity.Province;
@@ -13,12 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -44,6 +47,9 @@ public class CareController {
     @Autowired
     private UploadService uploadService;
 
+    @Autowired
+    private CareService careService;
+
     @RequestMapping("/tocare")
     public ModelAndView getMain(@CookieValue(value = "username",required = false)String username){
         ModelAndView mv = new ModelAndView();
@@ -65,10 +71,11 @@ public class CareController {
 
     @RequestMapping("/getUE")
     @ResponseBody
-    public String getUE(String content){
+    public String getUE(String content, HttpServletRequest request){
         String result = "";
         result= content == null||content == ""?"false":"success";
         System.out.println(content);
+        careService.createModel(content,request);
         return result;
     }
 
@@ -166,4 +173,11 @@ public class CareController {
      return config;
     }
 
+    @RequestMapping(value = "/getTemplate",method = RequestMethod.GET)
+    @ResponseBody
+    public String getTemplate(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        String template = (String)session.getAttribute("template");
+        return template;
+    }
 }

@@ -76,6 +76,26 @@ public class UploadServiceImpl implements UploadService {
         return map;
     }
 
+    @Override
+    public Map<String, Object> getStaticFile(byte[] fileByte, String url) {
+        Map<String,Object> map = new HashMap();
+        Response res;
+        try{
+            res = getManage().put(fileByte, url, getUpToken());
+            if(res!=null){
+                //解析上传成功的结果
+                DefaultPutRet putRet = new Gson().fromJson(res.bodyString(), DefaultPutRet.class);
+                System.out.println(putRet.key);
+                System.out.println(putRet.hash);
+                map = new HashMap<>();
+                map.put("key",PATH+putRet.key);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return map;
+    }
+
     public UploadManager getManage(){
         Configuration cft = new Configuration();
         return new UploadManager(cft);
@@ -93,4 +113,6 @@ public class UploadServiceImpl implements UploadService {
         String fileName = file.getOriginalFilename();
         return fileName.substring(fileName.lastIndexOf(".") + 1);
     }
+
+
 }
